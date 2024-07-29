@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let Scissors = "scissors";
+        let Rock = "rock";
+        let Paper = "paper";
+        function GetComputerChoice(){
+            let random = Math.floor(Math.random() * 3) ;
+            if(random == 0) {
+                console.log("paper");
+                return Paper;
+            }
+            else if(random == 1) {
+                console.log("Rock")
+                return Rock;
+            }
+            else if (random == 2) {
+                console.log(Scissors);
+                return Scissors;
+            }
+        }
+        function game_round(PlayerSelection, ComputerSelection) {
+            let win = "win";
+            let draw = "draw"
+            let lose = "lost"
+            if(PlayerSelection == Rock && ComputerSelection == Scissors){
+                return win;
+            }
+            else if(PlayerSelection == Scissors && ComputerSelection == Paper ){
+                return win;
+            }
+            else if (PlayerSelection == Paper && ComputerSelection == Rock) {
+                return win;
+            }
+            else if (PlayerSelection === ComputerSelection) {
+                return draw;
+            }
+            else {
+                return lose;
+            }
+
+        }
+
+        let i, count = 0;
+        function game()
+        { 
+        for(i = 0; i < 5; i++) { 
+            let PlayerSelection = prompt("what is your choice").toLowerCase();
+            let ComputerSelection = GetComputerChoice();
+            let result = game_round(PlayerSelection, ComputerSelection);
+            if (result == "win") {
+                count++;
+                console.log("you won, yur score is " + count)
+
+            }
+            else if(result == "draw"){
+                count = count + 0,5;
+                console.log("this is a draw " + count );
+            }
+            else if(result == "lost"){
+                console.log("you lost your score is " + count );
+            }
+            if(i == 4){
+                console.log("your final score is " + count);
+                return;
+            }
+
+        }
+        
+     }
+     game();
+    </script>
+</body>
+</html>
