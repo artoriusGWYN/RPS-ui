@@ -6,9 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <div>
+
+    </div>
     <script>
+        let Rock = "rock"
         let Scissors = "scissors";
-        let Rock = "rock";
         let Paper = "paper";
         function GetComputerChoice(){
             let random = Math.floor(Math.random() * 3) ;
@@ -47,34 +53,47 @@
 
         }
 
-        let i, count = 0;
-        function game()
+        let i, count_player = 0, count_computer = 0;
+        function game(PlayerSelection)
         { 
-        for(i = 0; i < 5; i++) { 
-            let PlayerSelection = prompt("what is your choice").toLowerCase();
+         
             let ComputerSelection = GetComputerChoice();
             let result = game_round(PlayerSelection, ComputerSelection);
             if (result == "win") {
-                count++;
-                console.log("you won, yur score is " + count)
+                count_player++;
+                document.querySelector("div").textContent = `you won, the computer chose ${ComputerSelection}, your score is ${count_player},  computer score is ${count_computer}` 
 
+            
             }
             else if(result == "draw"){
-                count = count + 0,5;
-                console.log("this is a draw " + count );
+                count_player = count_player + 0,5;
+                count_computer = count_computer + 0,5
+                document.querySelector("div").textContent = `you drew, the computer chose ${ComputerSelection}, your score is ${count_player}, computer score is ${count_computer}` 
+              
             }
             else if(result == "lost"){
-                console.log("you lost your score is " + count );
+                count_computer++;
+                document.querySelector("div").textContent = `you lost, the computer chose ${ComputerSelection}, your score is ${count_player}, computer score is ${count_computer}` ;
+             
             }
-            if(i == 4){
-                console.log("your final score is " + count);
-                return;
+            if(count_player == 5 || count_computer == 5) {
+                if(count_computer == 5){ 
+                document.querySelector("div").textContent = "game over, computer won";
+                return
+               }
+               else {
+                document.querySelector("div").textContent = "game over, you won";
+               }
             }
-
         }
-        
-     }
-     game();
+
+        const rock = document.querySelector("#rock");
+        const paper = document.querySelector("#paper");
+        const scissors = document.querySelector("#scissors");
+        rock.addEventListener("click", () => game(Rock));
+        paper.addEventListener("click", ()=> game(Paper));
+        scissors.addEventListener("click", ()=> game(Scissors));
+     
     </script>
 </body>
 </html>
